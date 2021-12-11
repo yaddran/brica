@@ -35,7 +35,6 @@ in the root of the project is assumed.
 Programmatically it can be used with the static execute function:
 ```
 import { Executer } from '@pureit/brica';
-
 Executer.execute('target_one, 'path_to_config');
 ``` 
 
