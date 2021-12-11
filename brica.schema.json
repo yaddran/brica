@@ -199,12 +199,32 @@
                 }
             }
         },
+        "action_rename": {
+            "allOf": [{ "$ref": "#/definitions/action_basic_properties" }],
+            "properties": {
+                "action": {
+                    "type": "string",
+                    "default": "rename",
+                    "const": "rename",
+                    "description": "Rename a file from source name to target name"
+                },
+                "target": {
+                    "type": "string",
+                    "description": "New file name"
+                },
+                "source": {
+                    "type": "string",
+                    "description": "File to rename"
+                }
+            }
+        },
         "action": {
             "anyOf": [
                 { "$ref": "#/definitions/action_mkdir" },
                 { "$ref": "#/definitions/action_rm" },
                 { "$ref": "#/definitions/action_cp" },
-                { "$ref": "#/definitions/action_sed" }
+                { "$ref": "#/definitions/action_sed" },
+                { "$ref": "#/definitions/action_rename" }
             ]
         }
     }

@@ -1,5 +1,5 @@
 import { resolve, join, dirname, basename, sep } from 'path';
-import { Dirent, Stats, readdirSync, rmdirSync, statSync, unlinkSync, mkdirSync, copyFileSync, readFileSync, appendFileSync, writeFileSync } from 'fs';
+import { Dirent, Stats, readdirSync, rmdirSync, statSync, unlinkSync, mkdirSync, copyFileSync, readFileSync, appendFileSync, writeFileSync, renameSync } from 'fs';
 
 export type FileMatcher = Array<any>;
 
@@ -160,5 +160,11 @@ export class Tools {
         if (!file) return '';
         data = data || '';
         writeFileSync(file, data);
+    }
+
+    public static renameFile(source: string, target: string): void {
+        if (!source) return;
+        if (!target) return;
+        renameSync(source, target);
     }
 }

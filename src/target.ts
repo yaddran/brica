@@ -4,6 +4,7 @@ import { MkDir } from './actions/mkdir';
 import { Rm } from './actions/rm';
 import { Cp } from './actions/cp';
 import { Sed } from './actions/sed';
+import { Rename } from './actions/rename';
 
 export class Target {
 
@@ -11,7 +12,8 @@ export class Target {
         mkdir: MkDir,
         rm: Rm,
         cp: Cp,
-        sed: Sed
+        sed: Sed,
+        rename: Rename
     };
 
     private static _target: any = null;

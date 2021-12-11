@@ -91,7 +91,7 @@
                 "action": "cp",
                 "title": "Copy licenses",
                 "flags": ["title"],
-                "target": "./dist/LICENSE",
+                "target": "./dist/licenses.txt",
                 "source": "./licenses/",
                 "exclude": [
                     { "name": "readme", "flags": "i", "dir": false }
@@ -100,6 +100,13 @@
                     { "name": "license", "flags": "i", "dir": false }
                 ],
                 "join": true
+            },
+            {
+                "action": "rename",
+                "title": "Rename licenses.txt to LICENSE",
+                "flags": ["title"],
+                "target": "./dist/LICENSE",
+                "source": "./dist/licenses.txt"
             },
             {
                 "action": "sed",

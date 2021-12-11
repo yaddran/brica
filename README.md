@@ -12,7 +12,7 @@ This library can be used to manipulate files and folders as a part of a build pr
 - Make folders
 - Search and replace strings in file with a string or values read from a json file
 
-The features are targeting the most used UNIX file commands [mkdir](#action-mkdir), [rm](#action-rm), [cp](#action-cp), [sed](#action-sed) etc. with few
+The features are targeting the most used UNIX file commands [mkdir](#action-mkdir), [rm](#action-rm), [cp](#action-cp), [sed](#action-sed), [rename](#action-rename) etc. with few
 changes and/or additions.
 
 ## Install
@@ -276,3 +276,35 @@ This action can be used to search and replace text in a target file using regula
 - replace defines multiple find and replace options using regular expression find and flags
 - json JSON file to load for the replacement values if property parm is also defined
 - property Property path in json for the value to use to replace the found match if json param is also defined
+
+### Action rename
+This action can be used to rename a file.
+```
+{
+    "$schema": "./node_modules/@pureit/brica/brica.schema.json"
+    ...
+    "build_step": {
+            "title": "Build step",
+            "description": "Step during build",
+            "flags": [
+                "title",
+                "description"
+            ],
+            "actions": [
+                ...
+                {
+                    "action": "rename",
+                    "title": "Rename licenses.txt to LICENSE",
+                    "flags": ["title"],
+                    "target": "./dist/LICENSE",
+                    "source": "./dist/licenses.txt"
+                }
+                ...
+            ]
+    }
+    ...
+}
+```
+- action is rename
+- target is the new file name
+- source is the existing file to rename
