@@ -12,7 +12,7 @@ This library can be used to manipulated files and folders as a part of a build p
 - Make folders
 - Search and replace strings in file with a string or values read from a json file
 
-The features are targeting the most used UNIX file commands mkdir, rm, cp, sed etc. with few
+The features are targeting the most used UNIX file commands [mkdir](#action-mkdir), [rm](#action-rm), [cp](#action-cp), [sed](#action-sed) etc. with few
 changes and/or additions.
 
 ## Install
@@ -91,7 +91,7 @@ Each target groups a number of actions and defines the target usage.
 - actions* are mandatory and define which actions should be executed when the target is ran
 
 ## Action
-Each action can have, in addition to specific ones need for the execution, one of the following properties:
+Each action can have, in addition to specific ones needed for the execution, one of the following properties:
 ```
 {
     "$schema": "./node_modules/@pureit/brica/brica.schema.json"
