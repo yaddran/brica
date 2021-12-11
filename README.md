@@ -1,6 +1,6 @@
 # Brica NPM File Manipulation Help Tools
 
-This library can be used to manipulated files and folders as a part of a build process, for instance. Using a single or multiple configuration files it is possible to define and later run different targets. Each target can have multiple actions. The actions can:
+This library can be used to manipulate files and folders as a part of a build process, for instance. Using a single or multiple configuration files it is possible to define and later run different targets. Each target can have multiple actions. The actions can:
 
 - delete files
 - delete folders
