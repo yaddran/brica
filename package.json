@@ -13,6 +13,10 @@
         "publish": "cd dist && npm publish --access public"
     },
     "keywords": [
+        "rm",
+        "cp",
+        "sed",
+        "mkdir",
         "build",
         "tools",
         "npm",

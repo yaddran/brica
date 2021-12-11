@@ -12,10 +12,36 @@ This library can be used to manipulated files and folders as a part of a build p
 - Make folders
 - Search and replace strings in file with a string or values read from a json file
 
+The features are targeting the most used UNIX file commands mkdir, rm, cp, sed etc. with few
+changes and/or additions.
+
 ## Install
 
 ```
 npm install @pureit/brica --save-dev
+```
+
+## Usage
+The tool can be started or used in package.json scripts using:
+```
+brica target_one [config_file]
+```
+You can replace target_one with any of the configured targets. If config_file path is not specified the
+```
+.brica.json
+```
+in the root of the project is assumed.
+
+Programmatically it can be used with the static execute function:
+```
+import { Executer } from '@pureit/brica';
+
+Executer.execute('target_one, 'path_to_config');
+``` 
+
+```
+var Executer = require("@pureit/brica").Executer;
+Executer.execute('target_one, 'path_to_config');
 ```
 
 ## Configure
@@ -23,6 +49,7 @@ The easiest configuration is with an assumed file in the root of the project.
 ```
 .brica.json
 ```
+Exemple configuration files could be found in the node_modules/@pureit/brica/examples.
 
 The configuration file should start with the proper schema so that your editor can offer help while editing the configuration.
 ```
@@ -38,17 +65,6 @@ The configuration file should start with the proper schema so that your editor c
 }
 ```
 You can create multiple configuration files as well. In that case you will need to supply both target and config file in the call.
-
-## Usage
-The tool can be started using:
-```
-brica target_one [config_file]
-```
-You can replace target_one with any of the configured targets. If config_file path is not specified the
-```
-.brica.json
-```
-in the root of the project is assumed.
 
 ## Target
 Each target groups a number of actions and defines the target usage.
