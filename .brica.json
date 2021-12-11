@@ -1,5 +1,5 @@
 {
-    "$schema": "./node_modules/brica/brica.schema.json",
+    "$schema": "./node_modules/@pureit/brica/brica.schema.json",
     "pre_build": {
         "title": "Pre build step",
         "description": "Creates and cleans distribution and help files",
@@ -103,7 +103,7 @@
             },
             {
                 "action": "sed",
-                "title": "Update LICENSE with version",
+                "title": "Update LICENSE with package info",
                 "flags": ["title"],
                 "target": "./dist/LICENSE",
                 "replace": [

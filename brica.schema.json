@@ -6,7 +6,6 @@
     "properties": {
         "$schema": {
             "type": "string",
-            "enum": ["./node_modules/brica/brica.schema.json"],
             "description": "Schema for the brica config file"
         }
     },

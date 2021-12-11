@@ -1,5 +1,5 @@
 {
-    "$schema": "./node_modules/brica/brica.schema.json",
+    "$schema": "./node_modules/@pureit/brica/brica.schema.json",
     "pre_build": {
         "title": "Pre build step",
         "description": "Creates and cleans distribution and help files",
@@ -33,7 +33,7 @@
             {
                 "action": "rm",
                 "title": "Remove LICENSE and unused d.ts files",
-                "target": "./dist",
+                "target": "./dist/",
                 "exclude": [
                     { "name": "brica\\.d\\.ts", "flags": "i", "dir": false }
                 ],
@@ -100,6 +100,17 @@
                     { "name": "license", "flags": "i", "dir": false }
                 ],
                 "join": true
+            },
+            {
+                "action": "sed",
+                "title": "Update LICENSE with version",
+                "flags": ["title"],
+                "target": "./dist/LICENSE",
+                "replace": [
+                    { "find": "#version#", "flags": "g", "json": "./dist/package.json", "property": ["version"] },
+                    { "find": "#name#", "flags": "g", "json": "./dist/package.json", "property": ["name"] },
+                    { "find": "#author#", "flags": "g", "json": "./dist/package.json", "property": ["author"] }
+                ]
             }
         ]
     }

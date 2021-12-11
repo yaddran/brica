@@ -1,4 +1,4 @@
-# Brica NPM Help Tools
+# Brica NPM File Manipulation Help Tools
 
 This library can be used to manipulated files and folders as a part of a build process, for instance. Using a single or multiple configuration files it is possible to define and later run different targets. Each target can have multiple actions. The actions can:
 
@@ -15,7 +15,7 @@ This library can be used to manipulated files and folders as a part of a build p
 ## Install
 
 ```
-npm install @pureit/brica
+npm install @pureit/brica --save-dev
 ```
 
 ## Configure
@@ -27,7 +27,7 @@ The easiest configuration is with an assumed file in the root of the project.
 The configuration file should start with the proper schema so that your editor can offer help while editing the configuration.
 ```
 {
-    "$schema": "./node_modules/brica/brica.schema.json"
+    "$schema": "./node_modules/@pureit/brica/brica.schema.json"
     "target_one: {
         ...
     },
@@ -54,7 +54,7 @@ in the root of the project is assumed.
 Each target groups a number of actions and defines the target usage.
 ```
 {
-    "$schema": "./node_modules/brica/brica.schema.json"
+    "$schema": "./node_modules/@pureit/brica/brica.schema.json"
     ...
     "build_step": {
             "title": "Build step",
@@ -79,7 +79,7 @@ Each target groups a number of actions and defines the target usage.
 Each action can have, in addition to specific ones need for the execution, one of the following properties:
 ```
 {
-    "$schema": "./node_modules/brica/brica.schema.json"
+    "$schema": "./node_modules/@pureit/brica/brica.schema.json"
     ...
     "build_step": {
             "title": "Build step",
@@ -110,7 +110,7 @@ Each action can have, in addition to specific ones need for the execution, one o
 This action is used to create a folder. The action will attempt to create the full folder path.
 ```
 {
-    "$schema": "./node_modules/brica/brica.schema.json"
+    "$schema": "./node_modules/@pureit/brica/brica.schema.json"
     ...
     "build_step": {
             "title": "Build step",
@@ -140,7 +140,7 @@ This action is used to create a folder. The action will attempt to create the fu
 This action is used to delete files and or folder.
 ```
 {
-    "$schema": "./node_modules/brica/brica.schema.json"
+    "$schema": "./node_modules/@pureit/brica/brica.schema.json"
     ...
     "build_step": {
             "title": "Build step",
@@ -178,7 +178,7 @@ This action is used to delete files and or folder.
 This action can be used to copy files or folders and to join/concatenate multiple files into a single file.
 ```
 {
-    "$schema": "./node_modules/brica/brica.schema.json"
+    "$schema": "./node_modules/@pureit/brica/brica.schema.json"
     ...
     "build_step": {
             "title": "Build step",
@@ -220,7 +220,7 @@ This action can be used to copy files or folders and to join/concatenate multipl
 This action can be used to search and replace text in a target file using regular expressions.
 ```
 {
-    "$schema": "./node_modules/brica/brica.schema.json"
+    "$schema": "./node_modules/@pureit/brica/brica.schema.json"
     ...
     "build_step": {
             "title": "Build step",
