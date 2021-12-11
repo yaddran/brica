@@ -17,6 +17,7 @@
         "cp",
         "sed",
         "mkdir",
+        "rename",
         "build",
         "tools",
         "npm",
