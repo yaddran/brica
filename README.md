@@ -9,6 +9,7 @@ This library can be used to manipulate files and folders as a part of a build pr
 - Copy folders
 - Copy files using include and/or exclude filters
 - Join/concatenate files
+- Rename file
 - Make folders
 - Search and replace strings in file with a string or values read from a json file
 
