@@ -1,0 +1,212 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "id": "https://pure-it-solutions.com/schemas/brica",
+    "title": "Brica Config File",
+    "type": "object",
+    "properties": {
+        "$schema": {
+            "type": "string",
+            "enum": ["./node_modules/brica/brica.schema.json"],
+            "description": "Schema for the brica config file"
+        }
+    },
+    "patternProperties": {
+        "^[0-9a-zA-Z_]+$": {
+            "type": "object",
+            "description": "Valid target name chars are 0-9, a-z, A-Z",
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "description": "Target title"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Target description"
+                },
+                "flags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "enum": ["title", "description"]
+                    },
+                    "description": "Target flags:\n- 'title' prints the title in the console\n- 'description' prints the description in the console"
+                },
+                "actions": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "$ref": "#/definitions/action"
+                    }
+                }
+            },
+            "required": [ "actions" ],
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false,
+    "definitions": {
+        "matcher": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Regular expression to match the file full path"
+                    },
+                    "flags": {
+                        "type": "string",
+                        "description": "Flags for name regular expression"
+                    },
+                    "dir": {
+                        "type": "boolean",
+                        "description": "File has to be directory/file depending on this flag if specified"
+                    }
+                }
+            }
+        },
+        "replacer": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "find": {
+                        "type": "string",
+                        "description": "Regular expression to find in the target"
+                    },
+                    "flags": {
+                        "type": "string",
+                        "description": "Flags for find regular expression"
+                    },
+                    "replace": {
+                        "type": "string",
+                        "description": "String to replace the found match"
+                    },
+                    "json": {
+                        "type": "string",
+                        "description": "JSON file to load for the replacement values if property parm is also defined"
+                    },
+                    "property": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Property path in json for the value to use to replace the found match if json param is also defined"
+                    }
+                }
+            }
+        },
+        "action_basic_properties": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "description": "Action title can be used for readability purposes or can be printed in the console at the moment of execution using flags"
+                },
+                "flags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "enum": ["title"]
+                    },
+                    "description": "Action flags:\n- 'title' prints the title in the console"
+                }
+            },
+            "required": [ "action" ]
+        },
+        "action_mkdir": {
+            "allOf": [{ "$ref": "#/definitions/action_basic_properties" }],
+            "properties": {
+                "action": {
+                    "type": "string",
+                    "default": "mkdir",
+                    "const": "mkdir",
+                    "description": "Action mkdir can be used to create a folder path"
+                },
+                "target": {
+                    "type": "string",
+                    "description": "Target path to create"
+                }
+            },
+            "required": [ "target" ]
+        },
+        "action_rm": {
+            "allOf": [{ "$ref": "#/definitions/action_basic_properties" }],
+            "properties": {
+                "action": {
+                    "type": "string",
+                    "default": "rm",
+                    "const": "rm",
+                    "description": "Action rm can be used to delete a file, delete or clear a folder, or delete specific files and/or folders within a folder"
+                },
+                "target": {
+                    "type": "string",
+                    "description": "Target to delete can be file, folder or folder that ends with / in which case folder itself is not included in the delete operation"
+                },
+                "exclude": {
+                    "$ref": "#/definitions/matcher",
+                    "description": "If file matches to exclude it will be ignored even if it matches the include"
+                },
+                "include": {
+                    "$ref": "#/definitions/matcher",
+                    "description": "If include is present then only files that do not match exclude and do match include will be processed"
+                }
+            },
+            "required": [ "target" ]
+        },
+        "action_cp": {
+            "allOf": [{ "$ref": "#/definitions/action_basic_properties" }],
+            "properties": {
+                "action": {
+                    "type": "string",
+                    "default": "cp",
+                    "const": "cp",
+                    "description": "Action cp can be used to copy folder/files or join folder files into single file"
+                },
+                "target": {
+                    "type": "string",
+                    "description": "Target folder for file copy operations or file for joining files"
+                },
+                "source": {
+                    "type": "string",
+                    "description": "Source folder can be file, folder or folder ending with / in which case the folder self is not copied"
+                },
+                "exclude": {
+                    "$ref": "#/definitions/matcher",
+                    "description": "If file matches to exclude it will be ignored even if it matches the include"
+                },
+                "include": {
+                    "$ref": "#/definitions/matcher",
+                    "description": "If include is present then only files that do not match exclude and do match include will be processed"
+                }
+            }
+        },
+        "action_sed": {
+            "allOf": [{ "$ref": "#/definitions/action_basic_properties" }],
+            "properties": {
+                "action": {
+                    "type": "string",
+                    "default": "sed",
+                    "const": "sed",
+                    "description": "Action sed can be used to replace strings in a file found via regular expression"
+                },
+                "target": {
+                    "type": "string",
+                    "description": "Target file to search and update"
+                },
+                "replace": {
+                    "$ref": "#/definitions/replacer",
+                    "description": "Find each of the regular expressions and replace with the defined string"
+                }
+            }
+        },
+        "action": {
+            "anyOf": [
+                { "$ref": "#/definitions/action_mkdir" },
+                { "$ref": "#/definitions/action_rm" },
+                { "$ref": "#/definitions/action_cp" },
+                { "$ref": "#/definitions/action_sed" }
+            ]
+        }
+    }
+}

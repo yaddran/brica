@@ -1,0 +1,36 @@
+{
+    "name": "@pureit/brica",
+    "version": "1.0.0",
+    "description": "Brica NPM Help Tools",
+    "main": "brica.js",
+    "bin": "bin.js",
+    "scripts": {
+        "lint": "eslint --ext .ts ./src",
+        "install_self": "tsc && node ./build/scripts/self_install.js",
+        "install": "npm run install_self",
+        "build": "brica pre_build && npm run install_self && brica post_build",
+        "publish": "cd dist && npm publish"
+    },
+    "keywords": [
+        "build",
+        "tools",
+        "npm",
+        "files",
+        "manipulation"
+    ],
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "homepage": "https://github.com/yaddran/brica/",
+    "author": "Pure IT Solutions",
+    "license": "ISC",
+    "dependencies": {},
+    "devDependencies": {
+        "@types/node": "^16.7.6",
+        "@typescript-eslint/eslint-plugin": "^4.16.1",
+        "@typescript-eslint/parser": "^4.16.1",
+        "eslint": "^7.21.0",
+        "typescript": "~4.4.4"
+    }
+}
