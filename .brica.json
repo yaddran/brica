@@ -120,5 +120,54 @@
                 ]
             }
         ]
+    },
+    "self": {
+        "title": "Add dist to node_modules/@pureit/brica",
+        "description": "Re-add link to dist in node_modules and create link in .bin",
+        "flags": [
+            "title",
+            "description"
+        ],
+        "actions": [
+            {
+                "action": "mkdir",
+                "title": "Create @pureit in node_modules",
+                "flags": ["title"],
+                "target": "./node_modules/@pureit"
+            },
+            {
+                "action": "unlink",
+                "title": "Remove existing node_modules/@pureit/brica link",
+                "flags": ["title"],
+                "target": "./node_modules/@pureit/brica"
+            },
+            {
+                "action": "link",
+                "title": "Add new node_modules/@pureit/brica link",
+                "flags": ["title"],
+                "target": "./node_modules/@pureit/brica",
+                "source": "./dist"
+            },
+            {
+                "action": "unlink",
+                "title": "Remove existing node_modules/.bin/brica link",
+                "flags": ["title"],
+                "target": "./node_modules/.bin/brica"
+            },
+            {
+                "action": "link",
+                "title": "Add new node_modules/.bin/brica link",
+                "flags": ["title"],
+                "target": "./node_modules/.bin/brica",
+                "source": "./dist/bin.js"
+            },
+            {
+                "action": "chmod",
+                "title": "Setting executable node_modules/.bin/brica link",
+                "flags": ["title"],
+                "target": "./node_modules/.bin/brica",
+                "mode": "766"
+            }
+        ]
     }
 }

@@ -1,5 +1,5 @@
 import { resolve, join, dirname, basename, sep } from 'path';
-import { Dirent, Stats, readdirSync, rmdirSync, statSync, unlinkSync, mkdirSync, copyFileSync, readFileSync, appendFileSync, writeFileSync, renameSync } from 'fs';
+import { Dirent, Stats, readdirSync, rmdirSync, statSync, unlinkSync, mkdirSync, copyFileSync, readFileSync, appendFileSync, writeFileSync, renameSync, symlinkSync, chmodSync } from 'fs';
 
 export type FileMatcher = Array<any>;
 
@@ -101,7 +101,11 @@ export class Tools {
     public static rm(path: string, d: boolean): void {
         if (!path) return;
         if (d) return rmdirSync(path);
-        unlinkSync(path);
+        try {
+            unlinkSync(path);
+        } catch (ignore) {
+            return;
+        }
     }
 
     public static mkdir(path: string, subpath: string = ''): void {
@@ -166,5 +170,17 @@ export class Tools {
         if (!source) return;
         if (!target) return;
         renameSync(source, target);
+    }
+
+    public static link(source: string, target: string): void {
+        if (!source) return;
+        if (!target) return;
+        symlinkSync(source, target);
+    }
+
+    public static chmod(target: string, mode: number): void {
+        if (target) return;
+        if (mode === undefined) return;
+        chmodSync(target, mode);
     }
 }

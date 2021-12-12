@@ -218,13 +218,69 @@
                 }
             }
         },
+        "action_unlink": {
+            "allOf": [{ "$ref": "#/definitions/action_basic_properties" }],
+            "properties": {
+                "action": {
+                    "type": "string",
+                    "default": "unlink",
+                    "const": "unlink",
+                    "description": "Unlink a file which if the file is not a link will delete it"
+                },
+                "target": {
+                    "type": "string",
+                    "description": "Link or file to remove"
+                }
+            }
+        },
+        "action_link": {
+            "allOf": [{ "$ref": "#/definitions/action_basic_properties" }],
+            "properties": {
+                "action": {
+                    "type": "string",
+                    "default": "link",
+                    "const": "link",
+                    "description": "Create symbolic target link to the existing source file or folder"
+                },
+                "target": {
+                    "type": "string",
+                    "description": "New link name"
+                },
+                "source": {
+                    "type": "string",
+                    "description": "Existing file or folder"
+                }
+            }
+        },
+        "action_chmod": {
+            "allOf": [{ "$ref": "#/definitions/action_basic_properties" }],
+            "properties": {
+                "action": {
+                    "type": "string",
+                    "default": "chmod",
+                    "const": "chmod",
+                    "description": "Adjust file mode of the target"
+                },
+                "target": {
+                    "type": "string",
+                    "description": "Target file to adjust mode"
+                },
+                "mode": {
+                    "type": "string",
+                    "description": "Octal string mode"
+                }
+            }
+        },
         "action": {
             "anyOf": [
                 { "$ref": "#/definitions/action_mkdir" },
                 { "$ref": "#/definitions/action_rm" },
                 { "$ref": "#/definitions/action_cp" },
                 { "$ref": "#/definitions/action_sed" },
-                { "$ref": "#/definitions/action_rename" }
+                { "$ref": "#/definitions/action_rename" },
+                { "$ref": "#/definitions/action_unlink" },
+                { "$ref": "#/definitions/action_link" },
+                { "$ref": "#/definitions/action_chmod" }
             ]
         }
     }

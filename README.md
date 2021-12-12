@@ -10,10 +10,13 @@ This library can be used to manipulate files and folders as a part of a build pr
 - Copy files using include and/or exclude filters
 - Join/concatenate files
 - Rename file
+- Unlink file or link
+- Create symbolic link to a file or a folder
+- Change file mode
 - Make folders
 - Search and replace strings in file with a string or values read from a json file
 
-The features are targeting the most used UNIX file commands [mkdir](#action-mkdir), [rm](#action-rm), [cp](#action-cp), [sed](#action-sed), [rename](#action-rename) etc. with few
+The features are targeting the most used UNIX file commands [mkdir](#action-mkdir), [rm](#action-rm), [cp](#action-cp), [sed](#action-sed), [rename](#action-rename), [unlink](#action-unlink), [link](#action-link), [chmod](#action-chmod) etc. with few
 changes and/or additions.
 
 ## Install
@@ -309,3 +312,97 @@ This action can be used to rename a file.
 - action is rename
 - target is the new file name
 - source is the existing file to rename
+
+### Action unlink
+This action can be used to unlink a link or to delete a file.
+```
+{
+    "$schema": "./node_modules/@pureit/brica/brica.schema.json"
+    ...
+    "build_step": {
+            "title": "Build step",
+            "description": "Step during build",
+            "flags": [
+                "title",
+                "description"
+            ],
+            "actions": [
+                ...
+                {
+                    "action": "unlink",
+                    "title": "Remove existing node_modules/@pureit/brica link",
+                    "flags": ["title"],
+                    "target": "./node_modules/@pureit/brica"
+                }
+                ...
+            ]
+    }
+    ...
+}
+```
+- action is unlink
+- target is the link or file to delete
+
+### Action link
+This action can be used to create a symbolic link to file or folder.
+```
+{
+    "$schema": "./node_modules/@pureit/brica/brica.schema.json"
+    ...
+    "build_step": {
+            "title": "Build step",
+            "description": "Step during build",
+            "flags": [
+                "title",
+                "description"
+            ],
+            "actions": [
+                ...
+                {
+                    "action": "link",
+                    "title": "Add new node_modules/@pureit/brica link",
+                    "flags": ["title"],
+                    "target": "./node_modules/@pureit/brica",
+                    "source": "./dist"
+                }
+                ...
+            ]
+    }
+    ...
+}
+```
+- action is link
+- target is the new link name
+- source is the existing file to which link will point
+
+### Action chmod
+This action can be used to change mode of a file.
+```
+{
+    "$schema": "./node_modules/@pureit/brica/brica.schema.json"
+    ...
+    "build_step": {
+            "title": "Build step",
+            "description": "Step during build",
+            "flags": [
+                "title",
+                "description"
+            ],
+            "actions": [
+                ...
+                {
+                    "action": "chmod",
+                    "title": "Setting executable node_modules/.bin/brica link",
+                    "flags": ["title"],
+                    "target": "./node_modules/.bin/brica",
+                    "mode": "766"
+                }
+                ...
+            ]
+    }
+    ...
+}
+```
+- action is chmod
+- target is the file whose mode will be changed
+- mode is a string containing octal digits for file mode

@@ -1,6 +1,6 @@
 {
     "name": "@pureit/brica",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "Brica NPM Help Tools",
     "main": "brica.js",
     "bin": "bin.js",
@@ -10,7 +10,8 @@
         "install": "npm run install_self",
         "build": "brica pre_build && npm run install_self && brica post_build",
         "login": "npm login",
-        "publish": "cd dist && npm publish --access public"
+        "publish": "cd dist && npm publish --access public",
+        "self": "brica self"
     },
     "keywords": [
         "rm",

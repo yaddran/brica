@@ -5,6 +5,9 @@ import { Rm } from './actions/rm';
 import { Cp } from './actions/cp';
 import { Sed } from './actions/sed';
 import { Rename } from './actions/rename';
+import { Unlink } from './actions/unlink';
+import { Link } from './actions/link';
+import { Chmod } from './actions/chmod';
 
 export class Target {
 
@@ -13,7 +16,10 @@ export class Target {
         rm: Rm,
         cp: Cp,
         sed: Sed,
-        rename: Rename
+        rename: Rename,
+        unlink: Unlink,
+        link: Link,
+        chmod: Chmod
     };
 
     private static _target: any = null;
