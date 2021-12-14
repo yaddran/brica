@@ -90,7 +90,7 @@ Each target groups a number of actions and defines the target usage.
 }
 ```
 - title defines the target usage
-- description describes the ditails about the target
+- description describes the details about the target
 - flags can be used to display title and/or description in the console at the moment of the execution
 - actions* are mandatory and define which actions should be executed when the target is ran
 
