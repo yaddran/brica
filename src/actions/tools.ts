@@ -24,9 +24,13 @@ export class Tools {
 
     public static isD(path: string): boolean {
         if (!path) return false;
-        const s: Stats = statSync(path);
-        if (!s) return false;
-        return s.isDirectory();
+        try {
+            const s: Stats = statSync(path);
+            if (!s) return false;
+            return s.isDirectory();
+        } catch (ignore) {
+            return false;
+        }
     }
 
     public static fileMatcher(list: Array<any>): FileMatcher {
