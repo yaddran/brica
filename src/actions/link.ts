@@ -11,6 +11,8 @@ export class Link {
         const abst: string = Tools.resolvePath(action.target);
         const abss: string = Tools.resolvePath(action.source);
 
+        Tools.rm(abst, false);
+        Tools.rm(abst, true);
         Tools.link(abss, abst);
 
         done();

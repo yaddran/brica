@@ -1,5 +1,5 @@
-import { resolve, join, dirname, basename, sep } from 'path';
-import { Dirent, Stats, readdirSync, rmdirSync, statSync, unlinkSync, mkdirSync, copyFileSync, readFileSync, appendFileSync, writeFileSync, renameSync, symlinkSync, chmodSync } from 'fs';
+import { resolve, join, dirname, basename, sep, relative } from 'path';
+import { Dirent, Stats, readdirSync, rmdirSync, statSync, unlinkSync, mkdirSync, copyFileSync, readFileSync, appendFileSync, writeFileSync, renameSync, symlinkSync, chmodSync, realpathSync } from 'fs';
 
 export type FileMatcher = Array<any>;
 
@@ -13,7 +13,7 @@ export class Tools {
 
     public static self(path: string): boolean {
         if (!path) return false;
-        const last: string = path.substr(-1);
+        const last: string = path.substring(path.length - 1);
         return this.ALL_SEP.indexOf(last) < 0;
     }
 
@@ -104,8 +104,8 @@ export class Tools {
 
     public static rm(path: string, d: boolean): void {
         if (!path) return;
-        if (d) return rmdirSync(path);
         try {
+            if (d) return rmdirSync(path);
             unlinkSync(path);
         } catch (ignore) {
             return;
@@ -140,7 +140,16 @@ export class Tools {
         if (!source) return;
         if (!folder) return;
         if (!file) return;
-        copyFileSync(source, join(folder, file));
+
+        try {
+            copyFileSync(source, join(folder, file));
+        } catch(ignore) {
+            let srp: string = realpathSync(source);
+            if (srp === source) return;
+            srp = relative(realpathSync(join(source, '..')), srp);
+            if (!srp) return;
+            symlinkSync(srp, join(folder, file));
+        }
     }
 
     public static pathAfter(parent: string, path: string): string {

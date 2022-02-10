@@ -11,7 +11,8 @@
         "build": "brica pre_build && npm run install_self && brica post_build",
         "login": "npm login",
         "publish": "cd dist && npm publish --access public",
-        "self": "brica self"
+        "self": "brica self",
+        "test": "brica test"
     },
     "keywords": [
         "rm",
