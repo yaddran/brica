@@ -16,7 +16,7 @@ This library can be used to manipulate files and folders as a part of a build pr
 - Make folders
 - Search and replace strings in file with a string or values read from a json file
 
-The features are targeting the most used UNIX file commands [mkdir](#action-mkdir), [rm](#action-rm), [cp](#action-cp), [sed](#action-sed), [rename](#action-rename), [unlink](#action-unlink), [link](#action-link), [chmod](#action-chmod) etc. with few
+The features are targeting the most used UNIX like file commands [mkdir](#action-mkdir), [rm](#action-rm), [cp](#action-cp), [sed](#action-sed), [rename](#action-rename), [unlink](#action-unlink), [link](#action-link), [chmod](#action-chmod) etc. with few
 changes and/or additions.
 
 ## Install
