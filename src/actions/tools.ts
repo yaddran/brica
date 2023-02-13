@@ -188,7 +188,7 @@ export class Tools {
     public static link(source: string, target: string): void {
         if (!source) return;
         if (!target) return;
-        symlinkSync(source, target);
+        symlinkSync(source, target, 'junction');
     }
 
     public static chmod(target: string, mode: number): void {
