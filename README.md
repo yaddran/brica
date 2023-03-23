@@ -15,8 +15,9 @@ This library can be used to manipulate files and folders as a part of a build pr
 - Change file mode
 - Make folders
 - Search and replace strings in file with a string or values read from a json file
+- Wait on a file
 
-The features are targeting the most used UNIX like file commands [mkdir](#action-mkdir), [rm](#action-rm), [cp](#action-cp), [sed](#action-sed), [rename](#action-rename), [unlink](#action-unlink), [link](#action-link), [chmod](#action-chmod) etc. with few
+The features are targeting the most used UNIX like file commands [mkdir](#action-mkdir), [rm](#action-rm), [cp](#action-cp), [sed](#action-sed), [rename](#action-rename), [unlink](#action-unlink), [link](#action-link), [chmod](#action-chmod), [waiton](#action-waiton) etc. with few
 changes and/or additions.
 
 ## Install
@@ -406,3 +407,33 @@ This action can be used to change mode of a file.
 - action is chmod
 - target is the file whose mode will be changed
 - mode is a string containing octal digits for file mode
+
+### Action waiton
+This action can be used to wait for a file to appear. If the file already exists the action will finish at once.
+```
+{
+    "$schema": "./node_modules/@pureit/brica/brica.schema.json"
+    ...
+    "build_step": {
+            "title": "Build step",
+            "description": "Step during build",
+            "flags": [
+                "title",
+                "description"
+            ],
+            "actions": [
+                ...
+                {
+                    "action": "waiton",
+                    "title": "Waiting for the previous build to finish",
+                    "flags": ["title"],
+                    "target": "./dist/library.d.ts"
+                }
+                ...
+            ]
+    }
+    ...
+}
+```
+- action is waiton
+- target is the file that we are waiting for

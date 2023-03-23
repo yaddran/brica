@@ -8,6 +8,7 @@ import { Rename } from './actions/rename';
 import { Unlink } from './actions/unlink';
 import { Link } from './actions/link';
 import { Chmod } from './actions/chmod';
+import { WaitOn } from './actions/waiton';
 
 export class Target {
 
@@ -19,7 +20,8 @@ export class Target {
         rename: Rename,
         unlink: Unlink,
         link: Link,
-        chmod: Chmod
+        chmod: Chmod,
+        waiton: WaitOn
     };
 
     private static _target: any = null;

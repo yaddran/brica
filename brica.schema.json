@@ -271,6 +271,21 @@
                 }
             }
         },
+        "action_waiton": {
+            "allOf": [{ "$ref": "#/definitions/action_basic_properties" }],
+            "properties": {
+                "action": {
+                    "type": "string",
+                    "default": "waiton",
+                    "const": "waiton",
+                    "description": "Wait for a file to be created"
+                },
+                "target": {
+                    "type": "string",
+                    "description": "Target file to wait for"
+                }
+            }
+        },
         "action": {
             "anyOf": [
                 { "$ref": "#/definitions/action_mkdir" },
@@ -280,7 +295,8 @@
                 { "$ref": "#/definitions/action_rename" },
                 { "$ref": "#/definitions/action_unlink" },
                 { "$ref": "#/definitions/action_link" },
-                { "$ref": "#/definitions/action_chmod" }
+                { "$ref": "#/definitions/action_chmod" },
+                { "$ref": "#/definitions/action_waiton" }
             ]
         }
     }

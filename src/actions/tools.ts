@@ -1,5 +1,5 @@
 import { resolve, join, dirname, basename, sep, relative } from 'path';
-import { Dirent, Stats, readdirSync, rmdirSync, statSync, unlinkSync, mkdirSync, copyFileSync, readFileSync, appendFileSync, writeFileSync, renameSync, symlinkSync, chmodSync, realpathSync } from 'fs';
+import { Dirent, Stats, readdirSync, rmdirSync, statSync, unlinkSync, mkdirSync, copyFileSync, readFileSync, appendFileSync, writeFileSync, renameSync, symlinkSync, chmodSync, realpathSync, existsSync, watch, FSWatcher } from 'fs';
 
 export type FileMatcher = Array<any>;
 
@@ -195,5 +195,21 @@ export class Tools {
         if (target) return;
         if (mode === undefined) return;
         chmodSync(target, mode);
+    }
+
+    public static exists(target: string): boolean {
+        return existsSync(target);
+    }
+
+    public static waiton(target: string, done: any): void {
+        if (typeof done !== 'function') return;
+        const dir: string = dirname(target);
+        const name: string = basename(target);
+        const watcher: FSWatcher = watch(dir, (event: string, filename: string) => {
+            if (event !== 'rename') return;
+            if (filename !== name) return;
+            watcher.close();
+            done();
+        });
     }
 }
