@@ -11,6 +11,11 @@ export class WaitOn {
 
         if (Tools.exists(abst)) return done();
 
-        Tools.waiton(abst, done);
+        const toi = setInterval(() => {
+            if (!Tools.exists(abst)) return;
+            clearInterval(toi);
+            done();
+        }, 1000);
     }
+
 }

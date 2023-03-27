@@ -1,6 +1,6 @@
 {
     "name": "@pureit/brica",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "description": "Brica NPM Help Tools",
     "main": "brica.js",
     "bin": "bin.js",
